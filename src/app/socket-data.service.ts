@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { Socket } from 'ngx-socket-io';
 export class SocketDataService {
   constructor(private socket: Socket) {}
 
-  getData() {
+  getData(): Observable<number[]> {
     this.socket.emit('subscribeToServer', 1000);
 
     return this.socket.fromEvent<number[]>('reading');
